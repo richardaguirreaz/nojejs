@@ -1,0 +1,10 @@
+steps:
+ # Docker Build
+ - name: 'gcr.io/cloud-builders/docker'
+ args: ['build', '-t', 'ARTIFACT_REGISTRY_REPO_DIR/api:${SHORT_SHA}','.']
+ # Docker push to Google Artifact Registry
+ - name: 'gcr.io/cloud-builders/docker'
+ args: ['push', 'ARTIFACT_REGISTRY_REPO_DIR/api_:${SHORT_SHA}']
+# Store images in Google Artifact Registry
+images:
+ - ARTIFACT_REGISTRY_REPO_DIR/api:${SHORT_SHA}
